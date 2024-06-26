@@ -7,8 +7,7 @@ import dotenv
 from dotenv import load_dotenv, find_dotenv
 
 # Set up Cohere client
-_ = load_dotenv(find_dotenv())
-co = cohere.Client(os.environ["COHERE_API_KEY"]) # Your Cohere API key
+co = cohere.Client(st.secrets["COHERE_API_KEY"])
 
 def generate_idea(cuisine, temperature):
   """
