@@ -6,35 +6,8 @@ import requests
 import re
 
 # Set up Cohere client
-#co = cohere.Client(st.secrets["COHERE_API_KEY"])
-co = cohere.Client(os.getenv('COHERE_API_KEY'))
-
-def get_nutrient_info(ingredient):
-    api_key = os.getenv('USDA_API_KEY')
-    base_url = "https://api.nal.usda.gov/fdc/v1"
-    
-    # Search for the ingredient
-    search_url = f"{base_url}/foods/search?api_key={api_key}&query={ingredient}"
-    response = requests.get(search_url)
-    data = response.json()
-    
-    if data['foods']:
-        food_id = data['foods'][0]['fdcId']
-        
-        # Get detailed nutrient information
-        details_url = f"{base_url}/food/{food_id}?api_key={api_key}"
-        details_response = requests.get(details_url)
-        details_data = details_response.json()
-        
-        # Extract relevant nutrient information
-        nutrients = {}
-        for nutrient in details_data['foodNutrients']:
-            if nutrient['nutrient']['name'] in ['Protein', 'Total lipid (fat)', 'Carbohydrate, by difference']:
-                nutrients[nutrient['nutrient']['name']] = nutrient['amount']
-        
-        return nutrients
-    
-    return None
+co = cohere.Client(st.secrets["COHERE_API_KEY"])
+#co = cohere.Client(os.getenv('COHERE_API_KEY'))
 
 def generate_idea_v1(cuisine, temperature):
   """

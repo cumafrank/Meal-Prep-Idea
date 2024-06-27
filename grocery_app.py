@@ -1,7 +1,7 @@
 import cohere
 import streamlit as st
 from dotenv import load_dotenv, find_dotenv
-from utils import get_nutrient_info, generate_idea_v2, generate_name, validate_nutrition
+from utils import generate_idea_v2, generate_name, validate_nutrition
 import time
 
 # The front end code starts here
